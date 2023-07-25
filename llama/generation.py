@@ -1,6 +1,46 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 # This software may be used and distributed according to the terms of the Llama 2 Community License Agreement.
 
+# 这段代码定义了一个名为`Llama`的类，该类用于使用Llama 2模型进行文本生成。以下是代码中的关键部分的功能解释：
+#
+# 1. `Llama.build(...):`: 这是一个静态方法，用于构建Llama对象。它接受以下参数：
+#    - `ckpt_dir`: 模型检查点的文件夹路径。
+#    - `tokenizer_path`: tokenizer文件的路径。
+#    - `max_seq_len`: 输入的文本序列的最大长度。
+#    - `max_batch_size`: 生成文本的最大批次大小。
+#    - `model_parallel_size`: 模型并行的大小（可选参数，默认为None）。
+#
+# 2. `def __init__(self, model: Transformer, tokenizer: Tokenizer):`: Llama类的构造函数，接受一个Transformer对象和一个Tokenizer对象作为参数，并将它们保存在类的实例变量中。
+#
+# 3. `def generate(...):`: 生成文本的方法，用于对给定的文本生成示例进行文本生成。该方法接受以下参数：
+#    - `prompt_tokens`: 包含输入文本序列的嵌套列表。
+#    - `max_gen_len`: 生成文本的最大长度。
+#    - `temperature`: 生成文本的温度参数，用于控制生成文本的随机性，默认值为0.6。
+#    - `top_p`: 用于Nucleus Sampling（Top-p Sampling）的p参数，默认值为0.9。
+#    - `logprobs`: 是否返回生成文本的对数概率（可选参数，默认为False）。
+#    - `echo`: 是否将输入文本包含在生成结果中（可选参数，默认为False）。
+#    该方法返回一个元组，包含生成的文本列表和（如果logprobs为True）对应的对数概率列表。
+#
+# 4. `def text_completion(...):`: 生成文本的方法，用于对给定的文本生成示例进行文本生成。该方法接受以下参数：
+#    - `prompts`: 包含文本生成示例的列表。
+#    - `temperature`: 生成文本的温度参数，用于控制生成文本的随机性，默认值为0.6。
+#    - `top_p`: 用于Nucleus Sampling（Top-p Sampling）的p参数，默认值为0.9。
+#    - `max_gen_len`: 生成文本的最大长度（可选参数，默认为None，表示使用模型的最大序列长度）。
+#    - `logprobs`: 是否返回生成文本的对数概率（可选参数，默认为False）。
+#    - `echo`: 是否将输入文本包含在生成结果中（可选参数，默认为False）。
+#    该方法返回一个列表，包含生成的文本及其相关信息。
+#
+# 5. `def chat_completion(...):`: 对话式生成文本的方法，用于对给定的对话进行文本生成。该方法接受以下参数：
+#    - `dialogs`: 包含对话的列表，每个对话由一个消息列表构成。
+#    - `temperature`: 生成文本的温度参数，用于控制生成文本的随机性，默认值为0.6。
+#    - `top_p`: 用于Nucleus Sampling（Top-p Sampling）的p参数，默认值为0.9。
+#    - `max_gen_len`: 生成文本的最大长度（可选参数，默认为None，表示使用模型的最大序列长度）。
+#    - `logprobs`: 是否返回生成文本的对数概率（可选参数，默认为False）。
+#    该方法返回一个列表，包含生成的对话及其相关信息。
+#
+# 该代码还定义了一些辅助函数和常量，用于文本生成和处理。它主要利用了Llama 2模型和Tokenizer来实现文本生成，并提供了对话式文本生成的功能。
+
+
 import json
 import os
 import sys

@@ -15,6 +15,25 @@ from fairscale.nn.model_parallel.layers import (
 )
 from torch import nn
 
+# 这段代码实现了一个Transformer模型，其中包含Transformer的编码器部分。以下是代码中的关键部分的功能解释：
+#
+# 1. `@dataclass`: 这是一个Python的装饰器，用于自动生成数据类。在这里，它用于定义一个名为`ModelArgs`的数据类，该类用于存储Transformer模型的参数。
+#
+# 2. `RMSNorm`: 这是一个RMSNorm（Root Mean Square Normalization）层的实现。RMSNorm是一种用于归一化神经网络层输出的技术。
+#
+# 3. `precompute_freqs_cis`: 这是一个辅助函数，用于预计算Rotary Embedding所需的复数角度。
+#
+# 4. `reshape_for_broadcast`和`apply_rotary_emb`: 这些函数用于应用Rotary Embedding。
+#
+# 5. `Attention`类: 这是Transformer模型中注意力机制的实现。
+#
+# 6. `FeedForward`类: 这是Transformer模型中前馈神经网络的实现。
+#
+# 7. `TransformerBlock`类: 这是Transformer模型中的一个编码器块，由注意力机制和前馈神经网络组成。
+#
+# 8. `Transformer`类: 这是整个Transformer模型的主体部分。它包含一个嵌入层、多个编码器块（TransformerBlock）和输出层。
+#
+# 总的来说，这段代码实现了一个Transformer模型，并提供了对输入序列的嵌入、编码和输出的功能。Transformer模型是一种用于处理序列数据的强大模型，常用于自然语言处理任务，如文本生成、机器翻译和文本分类等。
 
 @dataclass
 class ModelArgs:
